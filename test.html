@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Login - Aplikasi Stok Opname</title>
+    <meta name="description" content="Mobile app interface">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"
+        onload="window.lucideLoaded=true; if(window.initLucide) window.initLucide();"></script>
+    <script>
+        window.initLucide = function () { if (window.lucide) lucide.createIcons(); };
+        document.addEventListener('DOMContentLoaded', function () { if (window.lucideLoaded) window.initLucide(); });
+    </script>
+    <style type="text/tailwindcss">
+        :root {
+    --primary: #165DFF;
+    --primary-hover: #0E4BD9;
+    --foreground: #080C1A;
+    --secondary: #6A7686;
+    --muted: #EFF2F7;
+    --border: #F3F4F3;
+    --card-grey: #F1F3F6;
+    --success: #30B22D;
+    --success-light: #DCFCE7;
+    --success-dark: #166534;
+    --error: #ED6B60;
+    --error-light: #FEE2E2;
+    --error-dark: #991B1B;
+    --warning: #FED71F;
+    --warning-light: #FEF9C3;
+    --warning-dark: #854D0E;
+    --font-sans: 'Lexend Deca', sans-serif;
+  }
+  @theme inline {
+    --color-primary: var(--primary);
+    --color-primary-hover: var(--primary-hover);
+    --color-foreground: var(--foreground);
+    --color-secondary: var(--secondary);
+    --color-muted: var(--muted);
+    --color-border: var(--border);
+    --color-card-grey: var(--card-grey);
+    --color-success: var(--success);
+    --color-success-light: var(--success-light);
+    --color-success-dark: var(--success-dark);
+    --color-error: var(--error);
+    --color-error-light: var(--error-light);
+    --color-error-dark: var(--error-dark);
+    --color-warning: var(--warning);
+    --color-warning-light: var(--warning-light);
+    --color-warning-dark: var(--warning-dark);
+    --color-gray-50: var(--gray-50);
+    --color-gray-100: var(--gray-100);
+    --color-gray-200: var(--gray-200);
+    --color-gray-500: var(--gray-500);
+    --font-sans: var(--font-sans);
+  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  .safe-area-inset-bottom { padding-bottom: env(safe-area-inset-bottom, 0); }
+</style>
+</head>
+
+<body class="font-sans bg-muted min-h-screen flex justify-center items-start pt-0 sm:pt-10 pb-0 sm:pb-10">
+
+    <!-- Mobile App Container -->
+    <div
+        class="w-full h-full min-h-screen bg-white max-w-[402px] relative shadow-2xl sm:rounded-[32px] overflow-hidden flex flex-col">
+
+        <!-- Top Navbar -->
+        <header class="fixed top-0 w-full max-w-[402px] bg-white/90 backdrop-blur-md border-b border-border z-50">
+            <div class="flex items-center justify-center h-[76px] px-4 relative">
+                <h1 class="font-bold text-lg text-foreground">Masuk Akun</h1>
+                <button
+                    class="absolute right-4 size-10 flex items-center justify-center rounded-xl hover:bg-muted transition-colors cursor-pointer text-secondary">
+                    <i data-lucide="help-circle" class="size-5"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 pt-[76px] pb-32 px-4 overflow-y-auto scrollbar-hide">
+
+            <!-- Hero / Welcome Section -->
+            <section class="mt-6 mb-8 text-center animate-fade-in">
+                <div class="relative mx-auto size-24 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                    <div class="absolute inset-0 bg-primary/5 rounded-full animate-ping opacity-20"></div>
+                    <i data-lucide="library" class="size-10 text-primary"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-foreground mb-2">Selamat Datang</h2>
+                <p class="text-secondary text-sm px-4">Silakan masuk untuk memulai kegiatan stok opname perpustakaan.
+                </p>
+            </section>
+
+            <!-- Login Form Section -->
+            <section class="space-y-5 mb-8 animate-slide-up" style="animation-delay: 100ms;">
+                <!-- ID Input -->
+                <div class="space-y-2">
+                    <label class="text-xs font-semibold text-secondary uppercase tracking-wider ml-1">NIP / ID
+                        Petugas</label>
+                    <div class="relative group">
+                        <div
+                            class="absolute left-4 top-1/2 -translate-y-1/2 size-8 bg-muted rounded-lg flex items-center justify-center transition-colors group-focus-within:bg-primary/10">
+                            <i data-lucide="user"
+                                class="size-4 text-secondary group-focus-within:text-primary transition-colors"></i>
+                        </div>
+                        <input type="text" placeholder="Masukkan NIP Anda"
+                            class="w-full h-14 pl-14 pr-4 bg-white rounded-2xl border border-border text-foreground placeholder:text-secondary/50 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm font-medium">
+                    </div>
+                </div>
+
+                <!-- Password Input -->
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between ml-1">
+                        <label class="text-xs font-semibold text-secondary uppercase tracking-wider">Kata Sandi</label>
+                    </div>
+                    <div class="relative group">
+                        <div
+                            class="absolute left-4 top-1/2 -translate-y-1/2 size-8 bg-muted rounded-lg flex items-center justify-center transition-colors group-focus-within:bg-primary/10">
+                            <i data-lucide="lock"
+                                class="size-4 text-secondary group-focus-within:text-primary transition-colors"></i>
+                        </div>
+                        <input type="password" id="passwordInput" placeholder="••••••••"
+                            class="w-full h-14 pl-14 pr-12 bg-white rounded-2xl border border-border text-foreground placeholder:text-secondary/50 outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm font-medium">
+                        <button id="togglePassword"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 p-1 text-secondary hover:text-foreground cursor-pointer">
+                            <i data-lucide="eye" class="size-5"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-end pt-1">
+                        <a href="#"
+                            class="text-xs font-medium text-primary hover:text-primary-hover transition-colors">Lupa
+                            kata sandi?</a>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button
+                    class="w-full h-14 bg-primary hover:bg-primary-hover text-white font-semibold rounded-2xl flex items-center justify-center gap-2 transition-transform active:scale-[0.98] cursor-pointer">
+                    <span>Masuk Aplikasi</span>
+                    <i data-lucide="arrow-right" class="size-5"></i>
+                </button>
+            </section>
+
+            <!-- Info/Announcement Card -->
+            <section class="bg-card-grey/50 rounded-2xl p-4 border border-border mb-6 animate-slide-up"
+                style="animation-delay: 200ms;">
+                <div class="flex items-start gap-3">
+                    <div class="size-10 bg-warning/10 rounded-xl flex items-center justify-center shrink-0">
+                        <i data-lucide="calendar" class="size-5 text-warning-dark"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-foreground text-sm">Jadwal Stok Opname</h3>
+                        <p class="text-xs text-secondary mt-1 leading-relaxed">Periode stok opname Semester Genap
+                            berlangsung dari <span class="font-medium text-foreground">15 Okt - 30 Nov 2023</span>.
+                            Pastikan data tersimpan sebelum tenggat waktu.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Support Section -->
+            <section class="animate-slide-up" style="animation-delay: 300ms;">
+                <h3 class="text-sm font-bold text-foreground mb-3 px-1">Bantuan & Panduan</h3>
+                <div class="space-y-3">
+                    <a href="#"
+                        class="flex items-center gap-3 p-4 bg-white rounded-2xl border border-border hover:bg-gray-50 transition-colors group">
+                        <div
+                            class="size-10 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all text-primary">
+                            <i data-lucide="book-open" class="size-5"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-foreground text-sm">Panduan Penggunaan</h4>
+                            <p class="text-xs text-secondary">Cara melakukan scan buku</p>
+                        </div>
+                        <i data-lucide="chevron-right" class="size-5 text-secondary"></i>
+                    </a>
+
+                    <a href="#"
+                        class="flex items-center gap-3 p-4 bg-white rounded-2xl border border-border hover:bg-gray-50 transition-colors group">
+                        <div
+                            class="size-10 bg-success/10 rounded-xl flex items-center justify-center group-hover:bg-success group-hover:text-white transition-all text-success">
+                            <i data-lucide="message-circle" class="size-5"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-foreground text-sm">Hubungi Admin</h4>
+                            <p class="text-xs text-secondary">Laporkan kendala sistem</p>
+                        </div>
+                        <i data-lucide="chevron-right" class="size-5 text-secondary"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Bottom Spacer -->
+            <div class="h-6"></div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="fixed bottom-0 w-full max-w-[402px] bg-white border-t border-border z-50 pb-6 rounded-b-[32px]">
+            <div class="flex items-center justify-around h-16 px-2">
+                <a href="#"
+                    class="flex flex-col items-center justify-center py-2 px-3 text-primary cursor-pointer active-nav-item">
+                    <i data-lucide="log-in" class="size-6"></i>
+                    <span class="text-[10px] font-medium mt-1">Login</span>
+                </a>
+                <a href="#"
+                    class="flex flex-col items-center justify-center py-2 px-3 text-secondary cursor-pointer hover:text-secondary transition-colors">
+                    <i data-lucide="home" class="size-6"></i>
+                    <span class="text-[10px] font-medium mt-1">Home</span>
+                </a>
+                <a href="#"
+                    class="flex flex-col items-center justify-center py-2 px-3 text-secondary cursor-pointer hover:text-secondary transition-colors">
+                    <i data-lucide="scan-barcode" class="size-6"></i>
+                    <span class="text-[10px] font-medium mt-1">Scan</span>
+                </a>
+                <a href="#"
+                    class="flex flex-col items-center justify-center py-2 px-3 text-secondary cursor-pointer hover:text-secondary transition-colors">
+                    <i data-lucide="user" class="size-6"></i>
+                    <span class="text-[10px] font-medium mt-1">Profile</span>
+                </a>
+            </div>
+        </nav>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Icons
+            lucide.createIcons();
+
+            // Password Toggle Logic
+            const toggleBtn = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('passwordInput');
+
+            if (toggleBtn && passwordInput) {
+                toggleBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+
+                    // Update icon
+                    const icon = this.querySelector('svg');
+                    if (type === 'text') {
+                        icon.setAttribute('data-lucide', 'eye-off');
+                    } else {
+                        icon.setAttribute('data-lucide', 'eye');
+                    }
+                    lucide.createIcons();
+                });
+            }
+
+            // Animation for elements on load
+            const animatedElements = document.querySelectorAll('.animate-slide-up, .animate-fade-in');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+            });
+
+            // Trigger animations sequentially
+            setTimeout(() => {
+                animatedElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 100);
+
+            // Nav interaction
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Normally we would navigate, but for demo we just switch visual state
+                    navLinks.forEach(l => {
+                        l.classList.remove('text-primary');
+                        l.classList.add('text-secondary');
+                    });
+                    link.classList.remove('text-secondary');
+                    link.classList.add('text-primary');
+                });
+            });
+        });
+    </script>
+
+    <script>
+        // Fallback link handler (injected by ShaynaBuilder)
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('a').forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    // Show alert if no modal exists
+                    var modal = document.getElementById('page-not-found-modal');
+                    if (modal) {
+                        modal.classList.remove('hidden');
+                    } else {
+                        console.log('Navigation prevented: ' + this.href);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
