@@ -540,7 +540,7 @@ const ManagementScreen = () => {
                                 </View>
                                 <View style={{ flex: 1 }}>
                                     <Text style={styles.label}>Thn Terbit <Text style={styles.required}>*</Text></Text>
-                                    <TextInput style={styles.input} placeholder="2024" maxLength={4} keyboardType="numeric" value={bookForm.year_of_publication} onChangeText={v => setBookForm({ ...bookForm, year_of_publication: v })} />
+                                    <TextInput style={styles.input} placeholder="2026" maxLength={4} keyboardType="numeric" value={bookForm.year_of_publication} onChangeText={v => setBookForm({ ...bookForm, year_of_publication: v })} />
                                 </View>
                             </View>
                         </View>

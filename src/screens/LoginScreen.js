@@ -196,7 +196,7 @@ const LoginScreen = ({ navigation }) => {
                     </View>
 
                     <View style={styles.footer}>
-                        <Text style={styles.footerText}>© 2024 Library STO Team</Text>
+                        <Text style={styles.footerText}>© 2026 Library STO Team</Text>
                     </View>
                 </ScrollView>
             </KeyboardAvoidingView>

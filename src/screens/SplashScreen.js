@@ -74,7 +74,7 @@ const SplashScreen = ({ onFinish }) => {
                 </View>
 
                 <View style={styles.footer}>
-                    <Text style={styles.footerText}>© 2024 • Powered by STO Team</Text>
+                    <Text style={styles.footerText}>© 2026 • Powered by STO Team</Text>
                 </View>
             </Animated.View>
         </View>
