@@ -107,10 +107,18 @@ const DashboardScreen = () => {
                             <Book size={20} color="#fff" />
                         </View>
                         <Text style={styles.statValue}>{stats?.total_books || 0}</Text>
-                        <Text style={styles.statLabel}>Total Books</Text>
+                        <Text style={styles.statLabel}>Judul Buku</Text>
                     </View>
 
-                    <View style={[styles.statCard, { backgroundColor: '#dcfce7' }]}>
+                    <View style={[styles.statCard, { backgroundColor: '#f1f5f9' }]}>
+                        <View style={[styles.iconBox, { backgroundColor: '#64748b' }]}>
+                            <Users size={20} color="#fff" />
+                        </View>
+                        <Text style={styles.statValue}>{stats?.total_items || 0}</Text>
+                        <Text style={styles.statLabel}>Total Buku</Text>
+                    </View>
+
+                    <View style={[styles.statCard, { backgroundColor: '#dcfce7', marginTop: 12 }]}>
                         <View style={[styles.iconBox, { backgroundColor: '#22c55e' }]}>
                             <CheckCircle size={20} color="#fff" />
                         </View>
@@ -126,12 +134,12 @@ const DashboardScreen = () => {
                         <Text style={styles.statLabel}>Your STO</Text>
                     </View>
 
-                    <View style={[styles.statCard, { backgroundColor: '#fef3c7', marginTop: 12 }]}>
+                    <View style={[styles.statCard, { backgroundColor: '#fef3c7', marginTop: 12, width: '100%' }]}>
                         <View style={[styles.iconBox, { backgroundColor: '#f59e0b' }]}>
                             <Wallet size={20} color="#fff" />
                         </View>
-                        <Text style={[styles.statValue, { fontSize: 16 }]}>{formatRupiah(stats?.user_commission || 0)}</Text>
-                        <Text style={styles.statLabel}>Your Commission</Text>
+                        <Text style={[styles.statValue, { fontSize: 24 }]}>{formatRupiah(stats?.user_commission || 0)}</Text>
+                        <Text style={styles.statLabel}>Your Commission Earned</Text>
                     </View>
                 </View>
 

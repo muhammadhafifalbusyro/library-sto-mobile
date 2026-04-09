@@ -51,6 +51,8 @@ const ScanScreen = () => {
     const [history, setHistory] = useState([]);
     const [showSuccess, setShowSuccess] = useState(false);
     const [earnedCommission, setEarnedCommission] = useState(0);
+    const [scannedCode, setScannedCode] = useState(null);
+    const [verifiedBy, setVerifiedBy] = useState(null);
 
     // Camera States
     const { hasPermission, requestPermission } = useCameraPermission();
@@ -82,6 +84,8 @@ const ScanScreen = () => {
             const response = await apiClient.get(`/books/${code}`);
             setBook(response.data.book);
             setStatus(response.data.status);
+            setScannedCode(response.data.scanned_code);
+            setVerifiedBy(response.data.verified_by);
             setSelectedConditions([]); // Reset conditions for new book
             setNotes('');
         } catch (error) {
@@ -130,6 +134,7 @@ const ScanScreen = () => {
             const conditionStr = selectedConditions.join(', ');
             const response = await apiClient.post('/stock-opname', {
                 book_id: book.id,
+                item_code: scannedCode,
                 status: 'verified',
                 condition: conditionStr,
                 notes,
@@ -138,19 +143,8 @@ const ScanScreen = () => {
             const commission = response.data.earned_commission || 0;
             setEarnedCommission(commission);
 
-            // Add to session history
-            setHistory([{
-                id: book.id,
-                title: book.title,
-                isbn: book.isbn_issn,
-                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                status: 'verified'
-            }, ...history]);
-
             setShowSuccess(true);
-            setBook(null);
-            setIsbn('');
-            setIsScanning(true);
+            // We don't reset book detail here, we wait for modal close to match Web flow
         } catch (error) {
             console.error(error);
             const msg = error.response?.data?.message || 'Gagal menyimpan data.';
@@ -158,6 +152,23 @@ const ScanScreen = () => {
         } finally {
             setSaving(false);
         }
+    };
+
+    const handleCloseModal = () => {
+        // Add to session history before resetting
+        setHistory([{
+            id: book.id,
+            title: book.title,
+            isbn: book.isbn_issn,
+            item_code: scannedCode,
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            status: 'verified'
+        }, ...history]);
+
+        setShowSuccess(false);
+        setBook(null);
+        setIsbn('');
+        setIsScanning(true);
     };
 
     const renderCamera = () => {
@@ -250,11 +261,12 @@ const ScanScreen = () => {
                             </View>
                             <View style={styles.bookTexts}>
                                 <Text style={styles.resultBookTitle} numberOfLines={2}>{book.title}</Text>
-                                <Text style={styles.resultBookIsbn}>{book.isbn_issn}</Text>
+                                <Text style={styles.resultBookIsbn}>ISBN: {book.isbn_issn}</Text>
+                                <Text style={[styles.resultBookIsbn, { fontWeight: '800', color: COLORS.primary }]}>Kode Item: {scannedCode}</Text>
                                 <View style={[styles.statusTag, { backgroundColor: status === 'verified' ? '#dcfce7' : '#eff2f7' }]}>
                                     <Check size={12} color={status === 'verified' ? COLORS.green : COLORS.textSub} />
                                     <Text style={[styles.statusText, { color: status === 'verified' ? COLORS.green : COLORS.textSub }]}>
-                                        {status === 'verified' ? 'Terverifikasi' : 'Belum Verifikasi'}
+                                        {status === 'verified' ? `Terverifikasi oleh ${verifiedBy || 'Sistem'}` : 'Belum Verifikasi'}
                                     </Text>
                                 </View>
                             </View>
@@ -366,7 +378,7 @@ const ScanScreen = () => {
 
                         <TouchableOpacity
                             style={styles.closeModalBtn}
-                            onPress={() => setShowSuccess(false)}
+                            onPress={handleCloseModal}
                         >
                             <Text style={styles.closeModalBtnText}>Tutup & Scan Lagi</Text>
                         </TouchableOpacity>
